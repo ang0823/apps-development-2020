@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SOCIAL BOX</string>
+    <string name="email">Correo electrónico</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="password">Contraseña</string>
+    <string name="signup">Crear cuenta</string>
+</resources>
