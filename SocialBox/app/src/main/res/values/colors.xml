@@ -7,4 +7,6 @@
     <color name="primary_color">#40C4FF</color>
     <color name="secondary_color">#0091EA</color>
     <color name="app_light_blue">#80D8FF</color>
+    <color name="lighterBlue">#E1F5FE</color>
+    <color name="skyBlue">#B3E5FC</color>
 </resources>
