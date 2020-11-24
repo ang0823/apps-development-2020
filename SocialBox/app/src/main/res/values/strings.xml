@@ -4,4 +4,16 @@
     <string name="login">Iniciar sesión</string>
     <string name="password">Contraseña</string>
     <string name="signup">Crear cuenta</string>
+    <string name="name">Nombre(s)</string>
+    <string name="lastName">Apellidos</string>
+    <string name="passwordRepeat">Repetir contraseña</string>
+    <string name="join">¡Únete ya!</string>
+    <string name="cancel">Cancelar</string>
+    <string name="register">REGÍSTRATE</string>
+    <string name="status">Estado</string>
+    <string name="favPics">Fotos favoritas</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="fullName">Nombre completo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
