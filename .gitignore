@@ -86,3 +86,9 @@ lint/tmp/
 
 #lunacy temp files
 ~*.sketch
+
+#Microsoft office temp and backup files
+~*.doc*
+Backup of *.doc*
+~$*.xls*
+*.xlk
