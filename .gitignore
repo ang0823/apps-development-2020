@@ -92,3 +92,9 @@ lint/tmp/
 Backup of *.doc*
 ~$*.xls*
 *.xlk
+
+#Archivo temporal de EA
+SOCIAL_BOX.ldb
+
+#UNKNOWN
+~*.tmp
