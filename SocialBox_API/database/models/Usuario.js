@@ -5,17 +5,11 @@ class Usuario extends Model{}
 Usuario.init({
     nombre: {
         type: DataTypes.STRING(100),
-        allowNull: false,
-        validate: {
-            isAlpha: true
-        }        
+        allowNull: false    
     },
     apellidos: {
         type: DataTypes.STRING(100),
-        allowNull: false,
-        validate: {
-            isAlpha: true
-        }
+        allowNull: false
     },
     email: {
         type: DataTypes.STRING(150),
@@ -25,12 +19,7 @@ Usuario.init({
             isEmail: true
         }
     },
-    contrasena: {
-        type: DataTypes.STRING(50),
-        validate: {
-            min: 8
-        }
-    }
+    contrasena: DataTypes.STRING(50)
 }, {
     sequelize,
     modelName: "usuario"
