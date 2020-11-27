@@ -1,23 +1,15 @@
 const express = require('express');
 const sequelize = require('./database/dbConnection');
-const Usuario = require('./database/models/Usuario');
 const app = express();
 var PORT = 8080;
 
-app.get('/', (req, res) => {
-    
-});
+// Líneas usuadas para llenar el 'req.body'
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
-app.post('api/account', (req, res) => {
-    Usuario.create({
-        nombre: "Dora Andrea",
-        apellidos: "Sanchez Martínez",
-        email: "zs12011694@estudiantes.uv.mx",
-        contrasena: "123ABC"
-    }).then(usuario => {
-        res.json("Usuario guardado con éxito");
-    });
-});
+app.use('/api/users', require('./routes/usuarios'));
+
+
 
 app.listen(PORT, () => {
     sequelize.sync({force: false})
