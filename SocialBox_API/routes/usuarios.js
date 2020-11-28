@@ -24,7 +24,26 @@ router.post('/', (req, res) => {
     })
 })
 
-// EndPonit para editar una cuenta
+// EndPonit para editar el nombre, apellidos o email de una cuenta
+router.put('/:email', (req, res) => {
+    Usuario.update({
+        nombre: req.body.nombre,
+        apellidos: req.body.apellidos,
+        email: req.body.email
+    }, {
+        where: {
+            email: req.params.email
+        }
+    }).then(() => {
+        res.json({
+            code: 200
+        })
+    }).catch(() => {
+        res.json({
+            code: 400
+        })
+    })
+})
 
 // EndPonit para eliminar una cuenta
 
