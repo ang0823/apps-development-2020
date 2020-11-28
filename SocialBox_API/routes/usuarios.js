@@ -1,19 +1,28 @@
 const express = require("express");
 const router = express.Router();
 const Usuario = require("../database/models/Usuario")
+const {Op} = require('sequelize')
 
 // EndPonit para obtener cuentas por nombre
 router.get('/:nombre', (req, res) => {
     Usuario.findAll({
         attributes: ['nombre', 'apellidos', 'email'],
         where: {
-            nombre: req.params.nombre
-        },
-        raw: false
+            nombre: {
+                [Op.like]: '%' + req.params.nombre + '%'
+            }
+        }
     }).then(users => {
-        res.json({
-            usuarios: users
-        })
+        console.log(users.length)
+        if(users.length > 0) {
+            res.json(users);
+        } else {
+            res.json({
+                response: 'No se encontraron resultados'
+            })
+        }
+    }).catch(error => {
+        res.json(error)
     })
 })
 
