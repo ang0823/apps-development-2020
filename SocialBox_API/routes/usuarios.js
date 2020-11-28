@@ -3,6 +3,19 @@ const router = express.Router();
 const Usuario = require("../database/models/Usuario")
 
 // EndPonit para obtener cuentas por nombre
+router.get('/:nombre', (req, res) => {
+    Usuario.findAll({
+        attributes: ['nombre', 'apellidos', 'email'],
+        where: {
+            nombre: req.params.nombre
+        },
+        raw: false
+    }).then(users => {
+        res.json({
+            usuarios: users
+        })
+    })
+})
 
 // EndPonit para obtener una cuenta por email
 
