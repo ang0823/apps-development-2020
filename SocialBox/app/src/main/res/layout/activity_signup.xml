@@ -18,7 +18,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-
             android:gravity="center_vertical">
 
 
@@ -60,6 +59,7 @@
         android:orientation="vertical">
 
     <EditText
+        android:id="@+id/nameInput"
         android:layout_width="match_parent"
         android:layout_height="@dimen/inputHeight"
         android:background="@color/skyBlue"
@@ -70,6 +70,7 @@
         android:autofillHints="@string/name"/>
 
     <EditText
+        android:id="@+id/surnameInput"
         android:layout_width="match_parent"
         android:layout_height="@dimen/inputHeight"
         android:background="@color/skyBlue"
@@ -80,6 +81,7 @@
         android:autofillHints="@string/lastName"/>
 
     <EditText
+        android:id="@+id/mailInput"
         android:layout_width="match_parent"
         android:layout_height="@dimen/inputHeight"
         android:background="@color/skyBlue"
@@ -90,6 +92,7 @@
         android:autofillHints="@string/email"/>
 
     <EditText
+        android:id="@+id/passwordInput"
         android:layout_width="match_parent"
         android:layout_height="@dimen/inputHeight"
         android:background="@color/skyBlue"
@@ -100,6 +103,7 @@
         android:autofillHints="@string/password"/>
 
     <EditText
+        android:id="@+id/repasswordInput"
         android:layout_width="match_parent"
         android:layout_height="@dimen/inputHeight"
         android:background="@color/skyBlue"
@@ -110,6 +114,7 @@
         android:autofillHints="@string/passwordRepeat"/>
 
     <Button
+        android:id="@+id/signUpButton"
         android:layout_width="250dp"
         android:layout_height="@dimen/buttonHeight"
         android:layout_marginTop="50dp"
