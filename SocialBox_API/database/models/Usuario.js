@@ -19,7 +19,8 @@ Usuario.init({
             isEmail: true
         }
     },
-    contrasena: DataTypes.STRING(50)
+    contrasena: DataTypes.STRING(50),
+    profilePic: DataTypes.STRING
 }, {
     sequelize,
     modelName: "usuario"
