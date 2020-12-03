@@ -113,18 +113,19 @@
         android:hint="@string/passwordRepeat"
         android:autofillHints="@string/passwordRepeat"/>
 
-    <Button
-        android:id="@+id/signUpButton"
-        android:layout_width="250dp"
-        android:layout_height="@dimen/buttonHeight"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/filled_button"
-        android:radius="50dp"
-        android:layout_gravity="center"
-        android:text="@string/join"
-        android:textColor="@color/colorWhite"
-        android:textSize="18dp"/>
+        <Button
+            android:id="@+id/signUpButton"
+            android:layout_width="250dp"
+            android:layout_height="@dimen/buttonHeight"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/filled_button"
+            android:onClick="crearCuenta"
+            android:radius="50dp"
+            android:text="@string/join"
+            android:textColor="@color/colorWhite"
+            android:textSize="18dp" />
 
         <Button
             android:layout_width="250dp"

@@ -24,5 +24,6 @@ public class MainActivity extends AppCompatActivity {
     public void crearCuenta(View vista){
         Intent actividad = new Intent(this, SignupActivity.class);
         startActivity(actividad);
+        this.finish();
     }
 }
