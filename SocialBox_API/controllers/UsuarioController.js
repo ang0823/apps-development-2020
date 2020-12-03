@@ -1,8 +1,10 @@
 const Usuario = require('../database/models/Usuario')
 const {Op} = require('sequelize')
 
+
+
 module.exports = {
-    find: function (name, callback) {
+    findByName: function (name, callback) {
         Usuario.findAll({
             attributes: ['nombre', 'apellidos', 'email'],
             where: {
@@ -15,5 +17,18 @@ module.exports = {
         }).catch(error => {
             callback(error)
         })
+    },
+
+    findByEmail: function (email, callback) {
+        Usuario.findOne({
+            attributes: ['nombre', 'apellidos', 'email'],
+            where: {
+                email: email
+            }
+        }).then(user => {
+            callback(null, user)
+        }).catch(error => {
+            callback(error)
+        });
     }
 }

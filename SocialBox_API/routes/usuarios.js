@@ -34,7 +34,7 @@ router.post('login', (req, res) => {
 
 // EndPonit para obtener cuentas por nombre
 router.post('/nombre', (req, res) => {
-    UsuarioController.find(req.body.nombre, function(error, usuarios) {
+    UsuarioController.findByName(req.body.nombre, function(error, usuarios) {
         if(error) {
             res.status(500).json({
                 mensaje: "Error en el servidor"
@@ -47,21 +47,15 @@ router.post('/nombre', (req, res) => {
 
 // EndPonit para obtener una cuenta por email
 router.post('/correo', (req, res) => {
-    Usuario.findAll({
-        attributes: ['nombre', 'apellidos', 'email'],
-        where: {
-            email: req.body.email
+    UsuarioController.findByEmail(req.body.email, function(error, usuario) {
+        if(error) {
+            res.status(500).json({
+                mensaje: "Error en el servidor"
+            })
+        } else {
+            res.json(usuario)
         }
-    }).then(user => {
-        res.json({
-            user
-        })
-    }).catch(error => {
-        console.log(error)
-        res.json({
-            response: 'Ocurrio un error, intente más tarde.'
-        })
-    })
+    });
 })
 
 // EndPonit para registrar una cuenta
