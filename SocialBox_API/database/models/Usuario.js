@@ -20,7 +20,8 @@ Usuario.init({
         }
     },
     contrasena: DataTypes.STRING(50),
-    profilePic: DataTypes.STRING
+    profilePic: DataTypes.STRING,
+    status: DataTypes.STRING
 }, {
     sequelize,
     modelName: "usuario"
