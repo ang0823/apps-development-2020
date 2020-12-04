@@ -60,44 +60,55 @@ router.post('/correo', (req, res) => {
 
 // EndPonit para registrar una cuenta
 router.post('/', (req, res) => {
-    console.log(req.body)
-    Usuario.create({
-        nombre: req.body.nombre,
-        apellidos: req.body.apellidos,
-        email: req.body.email,
-        contrasena: req.body.contrasena
-    }).then(result => {
-        console.log.result
-        res.json({
-            nombre: 'nombre',
-            apellidos: 'surname',
-            email: result
-        })
-    }).catch(() => {
-        res.json({
-            code: 400
-        });
+    UsuarioController.create(req.body, function(error, usuario) {
+        if(error) {
+            res.status(500).json({
+                mensaje: "Error en el servidor"
+            })
+        } else {
+            res.json(usuario)
+        }
     })
 })
 
-// EndPonit para editar el nombre, apellidos o email de una cuenta
-router.put('/:email', (req, res) => {
-    Usuario.update({
-        nombre: req.body.nombre,
-        apellidos: req.body.apellidos,
-        email: req.body.email
-    }, {
-        where: {
-            email: req.params.email
+// EndPonit para editar el nombre, apellidos, email o status de una cuenta
+router.put('/', (req, res) => {
+    UsuarioController.update(req.body, function(error, usuario) {
+        if(error) {
+            res.status(500).json({
+                mensaje: "Error en el servior",
+                error
+            })
+        } else {
+            res.json(usuario)
         }
-    }).then(() => {
-        res.json({
-            code: 200
+    })
+})
+
+// Endpoint para editar foto de perfil
+router.put('/imagen', (req, res) => {
+    if(!req.files.profilePic) {
+        res.status(400).json({
+            mensaje: "Falta imagen para guardar"
         })
-    }).catch(() => {
-        res.json({
-            code: 400
-        })
+    }
+
+    var datos = {
+        imageName: req.files.profilePic.name,
+        userEmail: req.body.email
+    }
+    req.files.profilePic.mv("./images/profile/" + datos.imageName)
+
+    UsuarioController.updateProfPic(datos, function(error){
+        if(!error) {
+            res.status(500).json({
+                mensaje: "Error en el servidor",
+            })
+        } else {
+            res.json({
+                mensaje: "Foto actualizada"
+            })
+        }
     })
 })
 
