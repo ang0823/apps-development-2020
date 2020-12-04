@@ -26,6 +26,6 @@ describe('Obtener un usuario por email', function() {
                 console.log(usuario)
                 done()
             }
-        })
-    })
-})
+        });
+    });
+});
