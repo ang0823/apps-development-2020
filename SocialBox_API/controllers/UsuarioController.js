@@ -33,11 +33,13 @@ module.exports = {
     },
 
     create: function(user, callback) {
+        var defaultProfilePic = "./images/profile/default.png"
         Usuario.create({
             nombre: user.nombre,
             apellidos: user.apellidos,
             email: user.email,
-            contrasena: user.contrasena
+            contrasena: user.contrasena,
+            profilePic: defaultProfilePic
         }).then(user => {
             callback(null, `${user.nombre} ${user.apellidos} ${user.email}`)
         }).catch(error => {
