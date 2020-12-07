@@ -11,13 +11,10 @@ Usuario.init({
         type: DataTypes.STRING(100),
         allowNull: false
     },
-    email: {
-        type: DataTypes.STRING(150),
+    username: {
+        type: DataTypes.STRING(25),
         allowNull: false,
-        unique: true,
-        validate: {
-            isEmail: true
-        }
+        unique: true
     },
     contrasena: DataTypes.STRING(50),
     profilePic: DataTypes.STRING,
