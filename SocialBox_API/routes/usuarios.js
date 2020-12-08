@@ -12,7 +12,6 @@ router.post('login', (req, res) => {
             email: req.body.email
         }
     }).then(sentPassword => {
-        console.log(sentPassword);
         if(req.body.contrasena == sentPassword) {
             const payload = {
                 check: true
@@ -46,8 +45,8 @@ router.post('/nombre', (req, res) => {
 })
 
 // EndPonit para obtener una cuenta por email
-router.post('/correo', (req, res) => {
-    UsuarioController.findByEmail(req.body.email, function(error, usuario) {
+router.post('/username', (req, res) => {
+    UsuarioController.findByUsername(req.body.username, function(error, usuario) {
         if(error) {
             res.status(500).json({
                 mensaje: "Error en el servidor"
