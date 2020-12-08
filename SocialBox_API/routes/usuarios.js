@@ -64,7 +64,7 @@ router.get("/image/:name", (req, res) => {
     res.sendFile(imagePath);
 })
 
-// EndPonit para obtener una cuenta por email
+// EndPonit para obtener una cuenta por nombre de usuario
 router.post('/username', (req, res) => {
     UsuarioController.findByUsername(req.body.username, function(error, usuario) {
         if(error) {
@@ -72,7 +72,14 @@ router.post('/username', (req, res) => {
                 mensaje: "Error en el servidor"
             })
         } else {
-            res.json(usuario)
+            let user = {
+                nombre: usuario.nombre,
+                apellidos: usuario.apellidos,
+                username: usuario.username,
+                profilePic: usuario.profilePic.replace("./images/profile/", "http://127.0.0.1:8080/api/users/image/"),
+                status: usuario.status
+            }
+            res.json(user)
         }
     });
 })
