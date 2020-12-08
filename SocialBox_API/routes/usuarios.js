@@ -119,13 +119,13 @@ router.put('/imagen', (req, res) => {
         })
     }
 
-    var datos = {
-        imageName: req.files.profilePic.name,
-        userEmail: req.body.email
+    var data = {
+        imageName: req.body.username + "_" +req.files.profilePic.name,
+        username: req.body.username
     }
-    req.files.profilePic.mv("./images/profile/" + datos.imageName)
+    req.files.profilePic.mv("./images/profile/" + data.imageName)
 
-    UsuarioController.updateProfPic(datos, function(error){
+    UsuarioController.updateProfPic(data, function(error){
         if(!error) {
             res.status(500).json({
                 mensaje: "Error en el servidor",

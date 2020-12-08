@@ -53,7 +53,7 @@ module.exports = {
                 apellidos: user.apellidos,
                 status: user.status}, {
                     where: {
-                        email: user.email
+                        username: user.username
                     }
                 }).then(result => {
                 callback(null, result)
@@ -64,9 +64,10 @@ module.exports = {
 
     updateProfPic: function(datos, callback) {
         Usuario.update({
-            profilePic: "./images/profile/" + datos.imageName}, {
+            profilePic: "./images/profile/" + datos.imageName}, 
+            {
                 where: {
-                    email: datos.userEmail
+                    username: datos.username
                 }
             }).then(result => {
                 callback(result)
