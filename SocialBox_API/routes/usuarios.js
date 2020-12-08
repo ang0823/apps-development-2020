@@ -38,10 +38,30 @@ router.post('/nombre', (req, res) => {
             res.status(500).json({
                 mensaje: "Error en el servidor"
             })
-        } else {
-            res.json(usuarios)
+            return;
         }
+        let users = usuarios.map(x => {
+            return {
+                nombre: x.nombre,
+                apellidos: x.apellidos,
+                username: x.username,
+                profilePic: x.profilePic.replace("./images/profile/", "http://127.0.0.1:8080/api/users/image/"),
+                status: x.status
+            }
+        })
+
+        res.json(users)
     });
+})
+
+// Endpoint que se manda a llamar para recuperar la foto de perfil del usuario
+router.get("/image/:name", (req, res) => {
+    let image = req.params.name;
+    let currentDir = __dirname.split("\\");
+    currentDir.pop();
+    currentDir = currentDir.join("/")
+    let imagePath = currentDir + "/images/profile/" + image;
+    res.sendFile(imagePath);
 })
 
 // EndPonit para obtener una cuenta por email
