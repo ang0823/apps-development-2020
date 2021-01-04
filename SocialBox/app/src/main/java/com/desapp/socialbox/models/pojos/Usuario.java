@@ -3,7 +3,9 @@ package com.desapp.socialbox.models.pojos;
 public class Usuario {
     String nombre;
     String apellidos;
-    String email;
+    String username;
+    String profilePic;
+    String status;
 
     public String getNombre() {
         return nombre;
@@ -21,11 +23,19 @@ public class Usuario {
         this.apellidos = apellidos;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
+
+    public String getProfilePic() { return profilePic; }
+
+    public void setProfilePic(String profilePic) { this.profilePic = profilePic; }
+
+    public String getStatus() { return status; }
+
+    public void setStatus(String status) { this.status = status; }
 }
