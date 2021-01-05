@@ -1,5 +1,6 @@
 const express = require('express');
 const sequelize = require('./database/dbConnection');
+require('./database/asociaciones')
 const app = express();
 const fileUpload = require('express-fileupload');
 var PORT = 8080;
