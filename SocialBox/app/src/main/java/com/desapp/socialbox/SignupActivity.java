@@ -42,7 +42,7 @@ public class SignupActivity extends AppCompatActivity {
 
         nombre  = (EditText) findViewById(R.id.nameInput);
         apellidos = (EditText) findViewById(R.id.surnameInput);
-        email = (EditText) findViewById(R.id.mailInput);
+        email = (EditText) findViewById(R.id.usernameInput);
         contrasena = (EditText) findViewById(R.id.passwordInput);
         confirmacionContrasna = (EditText) findViewById(R.id.repasswordInput);
 
@@ -54,7 +54,7 @@ public class SignupActivity extends AppCompatActivity {
         Map<String, String> params = new HashMap<>();
         params.put("nombre", nombre.getText().toString());
         params.put("apellidos", apellidos.getText().toString());
-        params.put("email", email.getText().toString());
+        params.put("username", email.getText().toString());
         params.put("contrasena", contrasena.getText().toString());
 
         JSONObject jsonData = new JSONObject(params);
@@ -65,10 +65,10 @@ public class SignupActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     Usuario usuario = JsonAdapter.signUpAdapter(response);
-                    mostrarPerfil();
+                    mostrarSesion();
                 } catch (JSONException e) {
                     Toast.makeText(SignupActivity.this, "Respuesta inesperada del servidor.",
-                            Toast.LENGTH_LONG).show();;
+                            Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -77,13 +77,12 @@ public class SignupActivity extends AppCompatActivity {
                 Toast.makeText(SignupActivity.this, error.toString(), Toast.LENGTH_LONG).show();
             }
         });
-
         volley.agregarACola(signUpRequest);
     }
 
-    private void mostrarPerfil() {
-        Intent pantallaPerfil = new Intent(this, NavigationActivity.class);
-        startActivity(pantallaPerfil);
+    private void mostrarSesion() {
+        Intent intent = new Intent(this, NavigationActivity.class);
+        startActivity(intent);
         this.finish();
     }
 

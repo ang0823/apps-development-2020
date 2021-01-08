@@ -53,7 +53,7 @@ public class NavigationActivity extends AppCompatActivity {
                 if (fragment != null)
                     startFragment(fragment);
 
-                return false;
+                return true;
             }
         });
     }

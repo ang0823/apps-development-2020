@@ -3,7 +3,7 @@
     <item
         android:id="@+id/navBtn_home"
         android:icon="@drawable/home"
-        android:title="home"/>
+        android:title="Home"/>
 
     <item
         android:id="@+id/navBtn_profile"
@@ -22,6 +22,6 @@
 
     <item
         android:id="@+id/navBtn_otherOptions"
-        android:icon="@drawable/menu"
-        android:title="Opciones"/>
+        android:icon="@drawable/ic_baseline_person_add_24"
+        android:title="Añadir"/>
 </menu>

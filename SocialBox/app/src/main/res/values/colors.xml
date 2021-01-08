@@ -9,4 +9,5 @@
     <color name="app_light_blue">#80D8FF</color>
     <color name="lighterBlue">#E1F5FE</color>
     <color name="skyBlue">#B3E5FC</color>
+    <color name="colorBlack">#000000</color>
 </resources>

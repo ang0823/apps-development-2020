@@ -16,15 +16,8 @@ router.post('/login', (req, res) => {
         }
     }).then(usuario => {
         if (usuario.length > 0) {
-            /*const payload = {
-                check: true
-            };
-            const token  = jwt.sign(payload, app.get('llave'), {
-                expiresIn: 1440
-            });*/
             res.json({
                 authenticated: true
-                //token: token);
             })
         } else {
             res.json({
@@ -49,15 +42,18 @@ router.post('/nombre', (req, res) => {
         }
         let users = usuarios.map(x => {
             return {
+                id: x.id,
                 nombre: x.nombre,
                 apellidos: x.apellidos,
                 username: x.username,
-                profilePic: x.profilePic.replace("./images/profile/", "http://127.0.0.1:8080/api/users/image/"),
+                profilePic: x.profilePic.replace("./images/profile/", "http://192.168.1.70:8080/api/users/image/"),
                 status: x.status
             }
         })
 
-        res.json(users)
+        res.json({
+            usuarios: users
+        })
     });
 })
 
@@ -83,7 +79,7 @@ router.post('/username', (req, res) => {
                 nombre: usuario.nombre,
                 apellidos: usuario.apellidos,
                 username: usuario.username,
-                profilePic: usuario.profilePic.replace("./images/profile/", "http://127.0.0.1:8080/api/users/image/"),
+                profilePic: usuario.profilePic.replace("./images/profile/", "http://192.168.1.70:8080/api/users/image/"),
                 status: usuario.status
             }
             res.json(user)
@@ -96,7 +92,7 @@ router.post('/', (req, res) => {
     UsuarioController.create(req.body, function (error, usuario) {
         if (error) {
             res.status(500).json({
-                mensaje: "Error en el servidor"
+                mensaje: "Ocurrió un error al guardar la cuenta."
             })
         } else {
             res.json(usuario)

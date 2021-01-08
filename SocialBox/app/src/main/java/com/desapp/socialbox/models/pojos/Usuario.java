@@ -1,11 +1,16 @@
 package com.desapp.socialbox.models.pojos;
 
 public class Usuario {
+    int id;
     String nombre;
     String apellidos;
     String username;
     String profilePic;
     String status;
+
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
 
     public String getNombre() {
         return nombre;

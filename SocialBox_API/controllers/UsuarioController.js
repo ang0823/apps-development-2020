@@ -6,7 +6,7 @@ const {Op, where} = require('sequelize')
 module.exports = {
     findByName: function (name, callback) {
         Usuario.findAll({
-            attributes: ['nombre', 'apellidos', 'username', 'profilePic', 'status'],
+            attributes: ['id', 'nombre', 'apellidos', 'username', 'profilePic', 'status'],
             where: {
                 nombre: {
                     [Op.like]: '%' + name + '%'
@@ -21,7 +21,7 @@ module.exports = {
 
     findByUsername: function (nombre_usuario, callback) {
         Usuario.findOne({
-            attributes: ['nombre', 'apellidos', 'username', 'profilePic', 'status'],
+            attributes: ['id', 'nombre', 'apellidos', 'username', 'profilePic', 'status'],
             where: {
                 username: nombre_usuario
             }
@@ -41,7 +41,7 @@ module.exports = {
             contrasena: user.contrasena,
             profilePic: defaultProfilePic
         }).then(user => {
-            callback(null, `${user.nombre} ${user.apellidos} ${user.username}`)
+            callback(null, user)
         }).catch(error => {
             callback(error)
         });
