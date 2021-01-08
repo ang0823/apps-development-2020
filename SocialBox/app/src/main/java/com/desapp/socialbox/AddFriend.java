@@ -55,15 +55,15 @@ public class AddFriend extends Activity {
 
     private TextWatcher searchAction = new TextWatcher() {
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                usuarios.clear();
-        }
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             String input = userName.getText().toString().trim();
             if(input.length() > 0) {
                 findUserAccount();
+            } else {
+                usuarios.clear();
             }
         }
 
