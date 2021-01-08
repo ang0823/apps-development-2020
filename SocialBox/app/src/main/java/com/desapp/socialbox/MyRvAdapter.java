@@ -1,6 +1,7 @@
 package com.desapp.socialbox;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.desapp.socialbox.models.pojos.Usuario;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -35,8 +37,9 @@ public class MyRvAdapter extends RecyclerView.Adapter<MyRvAdapter.MyViewVolder> 
     public void onBindViewHolder(@NonNull MyViewVolder holder, int position) {
         holder.userFullName.setText(usuarios.get(position).getNombre()
                 + " " + usuarios.get(position).getApellidos());
-        holder.userStatus.setText(usuarios.get(position).getStatus());
         holder.userUsername.setText(usuarios.get(position).getUsername());
+        holder.userStatus.setText(usuarios.get(position).getStatus());
+        Picasso.get().load(usuarios.get(position).getProfilePic()).resize(160, 160).into(holder.userProfilePicture);
     }
 
     @Override
