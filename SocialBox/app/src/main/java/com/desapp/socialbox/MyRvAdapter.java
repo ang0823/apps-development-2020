@@ -39,7 +39,8 @@ public class MyRvAdapter extends RecyclerView.Adapter<MyRvAdapter.MyViewVolder> 
                 + " " + usuarios.get(position).getApellidos());
         holder.userUsername.setText(usuarios.get(position).getUsername());
         holder.userStatus.setText(usuarios.get(position).getStatus());
-        Picasso.get().load(usuarios.get(position).getProfilePic()).resize(160, 160).into(holder.userProfilePicture);
+        Picasso.get().load(usuarios.get(position).getProfilePic()).error(R.drawable.ic_not_found_image)
+                .resize(160, 160).into(holder.userProfilePicture);
     }
 
     @Override
