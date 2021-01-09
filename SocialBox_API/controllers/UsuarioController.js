@@ -9,7 +9,7 @@ module.exports = {
             attributes: ['id', 'nombre', 'apellidos', 'username', 'profilePic', 'status'],
             where: {
                 nombre: {
-                    [Op.like]: '%' + name + '%'
+                    [Op.like]: name + '%'
                 }
             }
         }).then(users => {
