@@ -19,6 +19,7 @@ import com.desapp.socialbox.R;
  * create an instance of this fragment.
  */
 public class OptionsFragment extends Fragment {
+    String usuario;
 
     public OptionsFragment() {
         // Required empty public constructor
@@ -34,6 +35,8 @@ public class OptionsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_options, container, false);
         Button addFriend = view.findViewById(R.id.addFriendBtn);
+        Bundle bundle = getArguments();
+        usuario = bundle.getString("user");
         addFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

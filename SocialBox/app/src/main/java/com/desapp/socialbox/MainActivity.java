@@ -95,6 +95,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void mostrarSesion() {
         Intent actividad = new Intent(this, NavigationActivity.class);
+        String user = username.getText().toString();
+        actividad.putExtra("user", user);
         startActivity(actividad);
         this.finish();
     }
