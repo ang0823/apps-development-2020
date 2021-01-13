@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AddFriend extends Activity {
+public class AddFriendActivity extends Activity {
     List<Usuario> usuarios;
     private EditText userName;
     private VolleyRequest volley;
@@ -42,7 +42,7 @@ public class AddFriend extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
         userName = findViewById(R.id.userNameInput);
-        volley = VolleyRequest.getInstance(AddFriend.this);
+        volley = VolleyRequest.getInstance(AddFriendActivity.this);
         colaPeticiones = volley.getColaPeticiones();
         recyclerView = findViewById(R.id.userSearch);
         recyclerView.setHasFixedSize(true);
@@ -82,17 +82,17 @@ public class AddFriend extends Activity {
             public void onResponse(JSONObject response) {
                 try{
                     usuarios = JsonAdapter.SearchAdapter(response);
-                    MyRvAdapter adapter = new MyRvAdapter(AddFriend.this, (ArrayList<Usuario>)usuarios);
+                    MyRvAdapter adapter = new MyRvAdapter(AddFriendActivity.this, (ArrayList<Usuario>)usuarios);
                     recyclerView.setAdapter(adapter);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(AddFriend.this));
+                    recyclerView.setLayoutManager(new LinearLayoutManager(AddFriendActivity.this));
                 }catch (JSONException e) {
-                    Toast.makeText(AddFriend.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddFriendActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(AddFriend.this, error.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(AddFriendActivity.this, error.toString(), Toast.LENGTH_LONG).show();
             }
         });
 

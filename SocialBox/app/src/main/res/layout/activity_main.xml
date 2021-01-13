@@ -41,7 +41,6 @@
 
         <EditText
             android:id="@+id/editTextUsername"
-            android:text="ang0823"
             android:layout_width="match_parent"
             android:layout_height="@dimen/inputHeight"
             android:layout_marginVertical="5dp"
@@ -53,7 +52,6 @@
 
         <EditText
             android:id="@+id/editTextPassword"
-            android:text="abc123"
             android:layout_width="match_parent"
             android:layout_height="@dimen/inputHeight"
             android:background="@color/app_light_blue"

@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.desapp.socialbox.AddFriend;
+import com.desapp.socialbox.AddFriendActivity;
 import com.desapp.socialbox.R;
 
 /**
@@ -45,7 +45,7 @@ public class OptionsFragment extends Fragment {
     }
 
     public void openAddFriendActivity() {
-        Intent intent = new Intent(getContext(), AddFriend.class);
+        Intent intent = new Intent(getContext(), AddFriendActivity.class);
         getActivity().startActivity(intent);
     }
 }
