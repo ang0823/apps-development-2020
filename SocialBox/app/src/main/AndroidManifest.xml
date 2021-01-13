@@ -14,7 +14,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".OtherUserProfileActivity"
             android:parentActivityName=".AddFriend"
-            android:label="resultDetails"/>
+            android:label="Perfil de usuario"/>
         <activity android:name=".AddFriend" />
         <activity android:name=".NavigationActivity" />
         <activity

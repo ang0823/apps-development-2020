@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Usuario = require("../database/models/Usuario")
 const { Op } = require('sequelize')
-const UsuarioController = require('../controllers/UsuarioController')
+const UsuarioController = require('../controllers/UsuarioController');
+const FriendshipsController = require("../controllers/FriendshipsController");
 
 // EndPonit para inciar sesión
 router.post('/login', (req, res) => {
@@ -17,7 +18,7 @@ router.post('/login', (req, res) => {
     }).then(usuario => {
         if (usuario.length > 0) {
             res.json({
-                authenticated: true
+                authenticated: true,
             })
         } else {
             res.json({
@@ -141,6 +142,15 @@ router.put('/imagen', (req, res) => {
     })
 })
 
-// EndPonit para eliminar una cuenta
+// EndPonit para agregar amigo
+router.post('/agregaramigo', (req, res) => {
+    FriendshipsController.addFriend(req.body, function(error, response) {
+        if(!error) {
+            res.send(response);
+        } else {
+            res.send(error);
+        }
+    })
+})
 
 module.exports = router;

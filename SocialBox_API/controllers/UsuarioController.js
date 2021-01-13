@@ -1,5 +1,5 @@
 const Usuario = require('../database/models/Usuario')
-const {Op, where} = require('sequelize')
+const {Op, where, DataTypes} = require('sequelize')
 
 
 
@@ -39,7 +39,11 @@ module.exports = {
             apellidos: user.apellidos,
             username: user.username,
             contrasena: user.contrasena,
-            profilePic: defaultProfilePic
+            profilePic: defaultProfilePic,
+            status: {
+                type: DataTypes.STRING,
+                defaultValue: 'Hola, estoy usando SocialBox'
+            }
         }).then(user => {
             callback(null, user)
         }).catch(error => {

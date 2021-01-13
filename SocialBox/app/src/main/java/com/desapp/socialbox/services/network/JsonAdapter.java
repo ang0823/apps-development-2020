@@ -45,4 +45,16 @@ public class JsonAdapter {
 
         return usuarios;
     }
+
+    public static Usuario UserAdapter(JSONObject jsonObject) throws JSONException {
+        Usuario usuario = new Usuario();
+
+        usuario.setNombre(jsonObject.getString("nombre"));
+        usuario.setApellidos(jsonObject.getString("apellidos"));
+        usuario.setUsername(jsonObject.getString("username"));
+        usuario.setStatus(jsonObject.getString("status"));
+        usuario.setProfilePic(jsonObject.getString("profilePic"));
+
+        return usuario;
+    }
 }

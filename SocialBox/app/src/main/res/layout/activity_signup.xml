@@ -67,7 +67,8 @@
         android:padding="10dp"
         android:inputType="textPersonName"
         android:hint="@string/name"
-        android:autofillHints="@string/name"/>
+        android:autofillHints="@string/name"
+        android:text="Dora Andrea"/>
 
     <EditText
         android:id="@+id/surnameInput"
@@ -78,10 +79,11 @@
         android:padding="10dp"
         android:inputType="textPersonName"
         android:hint="@string/lastName"
-        android:autofillHints="@string/lastName"/>
+        android:autofillHints="@string/lastName"
+        android:text="Sanchez Martínez"/>
 
     <EditText
-        android:id="@+id/mailInput"
+        android:id="@+id/usernameInput"
         android:layout_width="match_parent"
         android:layout_height="@dimen/inputHeight"
         android:background="@color/skyBlue"
@@ -89,7 +91,8 @@
         android:padding="10dp"
         android:inputType="textEmailAddress"
         android:hint="@string/email"
-        android:autofillHints="@string/email"/>
+        android:autofillHints="@string/email"
+        android:text="motita15"/>
 
     <EditText
         android:id="@+id/passwordInput"
@@ -100,7 +103,8 @@
         android:padding="10dp"
         android:inputType="textPassword"
         android:hint="@string/password"
-        android:autofillHints="@string/password"/>
+        android:autofillHints="@string/password"
+        android:text=".secret"/>
 
     <EditText
         android:id="@+id/repasswordInput"
@@ -111,7 +115,8 @@
         android:padding="10dp"
         android:inputType="textPassword"
         android:hint="@string/passwordRepeat"
-        android:autofillHints="@string/passwordRepeat"/>
+        android:autofillHints="@string/passwordRepeat"
+        android:text=".secret"/>
 
         <Button
             android:id="@+id/signUpButton"
