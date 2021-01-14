@@ -111,8 +111,20 @@ router.put('/imagen', (req, res) => {
                 mensaje: error.message
             })
         } else {
-            res.status(200).json({
-                mensaje: "Foto de perfil actualizada correctamente"
+            var datos = {
+                imageName: req.body.username,
+                username: req.body.username
+            }
+            UsuarioController.updateProfPic(datos, function(error) {
+                if(error) {
+                    res.status(500).json({
+                        mensaje: error
+                    });
+                } else {
+                    res.status(200).json({
+                        mensaje: "Foto de perfil actualizada"
+                    })
+                }
             })
         }
     });

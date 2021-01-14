@@ -65,14 +65,14 @@ module.exports = {
 
     updateProfPic: function (datos, callback) {
         Usuario.update({
-            profilePic: "./images/profile/" + datos.imageName
+            profilePic: "./images/profile/" + datos.imageName + ".jpg"
         },
             {
                 where: {
                     username: datos.username
                 }
             }).then(result => {
-                callback(result)
+                callback(null)
             }).catch(error => {
                 callback(error)
             })
