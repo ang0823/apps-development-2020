@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -30,6 +31,7 @@ import java.util.Map;
 
 public class AddFriendActivity extends Activity {
     List<Usuario> usuarios;
+    String passedUsername;
     private EditText userName;
     private VolleyRequest volley;
     private RequestQueue colaPeticiones;
@@ -41,6 +43,8 @@ public class AddFriendActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
+        Intent intent = getIntent();
+        passedUsername = intent.getStringExtra("user");
         userName = findViewById(R.id.userNameInput);
         volley = VolleyRequest.getInstance(AddFriendActivity.this);
         colaPeticiones = volley.getColaPeticiones();
