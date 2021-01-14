@@ -110,7 +110,7 @@ router.put('/', (req, res) => {
                 error
             })
         } else {
-            res.json(usuario)
+            res.status(200).json({usuario});
         }
     })
 })
