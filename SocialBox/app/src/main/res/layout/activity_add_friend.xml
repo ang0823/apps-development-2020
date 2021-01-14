@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/lighterBlue"
     android:padding="12dp"
-    tools:context=".AddFriend"
+    tools:context=".AddFriendActivity"
     android:orientation="vertical">
 
     <EditText

@@ -15,13 +15,13 @@ import com.desapp.socialbox.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link OptionsFragment#newInstance} factory method to
+ * Use the {@link AnadirFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class OptionsFragment extends Fragment {
+public class AnadirFragment extends Fragment {
     String usuario;
 
-    public OptionsFragment() {
+    public AnadirFragment() {
         // Required empty public constructor
     }
 
@@ -33,22 +33,23 @@ public class OptionsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_options, container, false);
+        View view = inflater.inflate(R.layout.fragment_anadir, container, false);
         Button addFriend = view.findViewById(R.id.addFriendBtn);
         Bundle bundle = getArguments();
         usuario = bundle.getString("user");
         addFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openAddFriendActivity();
+                openAddFriendActivity(v);
             }
         });
 
         return view;
     }
 
-    public void openAddFriendActivity() {
+    public void openAddFriendActivity(View view) {
         Intent intent = new Intent(getContext(), AddFriendActivity.class);
+        intent.putExtra("user", usuario);
         getActivity().startActivity(intent);
     }
 }

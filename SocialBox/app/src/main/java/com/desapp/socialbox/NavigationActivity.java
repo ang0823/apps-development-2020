@@ -13,7 +13,7 @@ import android.view.MenuItem;
 import com.desapp.socialbox.fragment.FavoritesFragment;
 import com.desapp.socialbox.fragment.HomeFragment;
 import com.desapp.socialbox.fragment.NotficationsFragment;
-import com.desapp.socialbox.fragment.OptionsFragment;
+import com.desapp.socialbox.fragment.AnadirFragment;
 import com.desapp.socialbox.fragment.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -52,7 +52,7 @@ public class NavigationActivity extends AppCompatActivity {
                         fragment = new NotficationsFragment();
                         break;
                     case R.id.navBtn_otherOptions:
-                        fragment = new OptionsFragment();
+                        fragment = new AnadirFragment();
                         break;
                 }
                 if (fragment != null)
