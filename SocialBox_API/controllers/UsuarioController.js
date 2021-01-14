@@ -1,5 +1,5 @@
 const Usuario = require('../database/models/Usuario')
-const {Op, where, DataTypes} = require('sequelize')
+const { Op, where, DataTypes } = require('sequelize')
 
 
 
@@ -32,7 +32,7 @@ module.exports = {
         });
     },
 
-    create: function(user, callback) {
+    create: function (user, callback) {
         var defaultProfilePic = "./images/profile/default.png"
         Usuario.create({
             nombre: user.nombre,
@@ -51,24 +51,26 @@ module.exports = {
         });
     },
 
-    update: function(user, callback) {
-            Usuario.update({           
-                nombre: user.nombre,
-                apellidos: user.apellidos,
-                status: user.status}, {
-                    where: {
-                        username: user.username
-                    }
-                }).then(result => {
-                callback(null, result)
-            }).catch(error => {
-                callback(error)
-            });
+    update: function (user, callback) {
+        Usuario.update({
+            nombre: user.nombre,
+            apellidos: user.apellidos,
+            status: user.status
+        }, {
+            where: {
+                username: user.username
+            }
+        }).then(result => {
+            callback(null, result)
+        }).catch(error => {
+            callback(error)
+        });
     },
 
-    updateProfPic: function(datos, callback) {
+    updateProfPic: function (datos, callback) {
         Usuario.update({
-            profilePic: "./images/profile/" + datos.imageName}, 
+            profilePic: "./images/profile/" + datos.imageName
+        },
             {
                 where: {
                     username: datos.username

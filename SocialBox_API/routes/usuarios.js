@@ -101,7 +101,7 @@ router.post('/', (req, res) => {
     })
 })
 
-// EndPonit para editar el nombre, apellidos, email o status de una cuenta
+// EndPonit para editar el nombre, apellidos o status de una cuenta
 router.put('/', (req, res) => {
     UsuarioController.update(req.body, function (error, usuario) {
         if (error) {
