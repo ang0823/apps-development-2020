@@ -1,15 +1,19 @@
 package com.desapp.socialbox.fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -22,8 +26,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.desapp.socialbox.EditInfoActivity;
-import com.desapp.socialbox.MainActivity;
-import com.desapp.socialbox.NavigationActivity;
 import com.desapp.socialbox.R;
 import com.desapp.socialbox.models.pojos.Usuario;
 import com.desapp.socialbox.services.network.ApiEndpoint;
@@ -34,10 +36,13 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ProfileFragment extends Fragment implements PopupMenu.OnMenuItemClickListener {
+    final int PICK_IMAGE = 1;
     String nombreUsuario;
     Usuario usuario;
     ImageView fotoPerfil;
@@ -46,6 +51,8 @@ public class ProfileFragment extends Fragment implements PopupMenu.OnMenuItemCli
     ImageButton editProfile;
     VolleyRequest volley;
     RequestQueue colaPeticiones;
+    Uri imageUri;
+    Bitmap bitmap;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -129,7 +136,7 @@ public class ProfileFragment extends Fragment implements PopupMenu.OnMenuItemCli
                 modifyProfileData();
                 return true;
             case R.id.info:
-                Toast.makeText(getActivity(), "Presionnaste editar información", Toast.LENGTH_SHORT).show();
+                modifyProfilePicture();
                 return true;
             default:
                 return false;
@@ -143,5 +150,63 @@ public class ProfileFragment extends Fragment implements PopupMenu.OnMenuItemCli
         intent.putExtra("apellidos", usuario.getApellidos());
         intent.putExtra("estado", usuario.getStatus());
         getActivity().startActivity(intent);
+    }
+
+    private void modifyProfilePicture() {
+        Intent gallery = new Intent();
+        gallery.setType("image/*");
+        gallery.setAction(Intent.ACTION_GET_CONTENT);
+
+        startActivityForResult(Intent.createChooser(gallery, "Seleccionar nueva foto"), PICK_IMAGE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == PICK_IMAGE && resultCode == getActivity().RESULT_OK) {
+            imageUri = data.getData();
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), imageUri);
+                uploadImage();
+            } catch (IOException e) {
+                Toast.makeText(getActivity(), "Error interno:\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void uploadImage() {
+        String image = bitmapToString();
+        Map<String, String> params = new HashMap();
+        params.put("username", nombreUsuario);
+        params.put("image", image);
+
+        JSONObject bodyRequest = new JSONObject(params);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, ApiEndpoint.modifyProfilePic,
+                bodyRequest, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try{
+                    fotoPerfil.setImageBitmap(bitmap);
+                    Toast.makeText(getContext(), response.getString("mensaje"), Toast.LENGTH_SHORT).show();
+                } catch(JSONException e) {
+                    Toast.makeText(getContext(), "Foto actualizada", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getContext(), ("Ups! No pudimos actualizar tu foto de perfil\n" + error.toString()), Toast.LENGTH_SHORT).show();
+            }
+        }) ;
+
+        volley.agregarACola(request);
+    }
+
+    private String bitmapToString() {
+        ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArray);
+        byte[] imgBytes = byteArray.toByteArray();
+        return Base64.encodeToString(imgBytes, Base64.DEFAULT);
     }
 }

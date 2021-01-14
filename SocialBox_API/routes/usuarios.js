@@ -1,4 +1,5 @@
 const express = require("express");
+const fs = require('fs')
 const router = express.Router();
 const Usuario = require("../database/models/Usuario")
 const { Op } = require('sequelize')
@@ -101,6 +102,23 @@ router.post('/', (req, res) => {
     })
 })
 
+// Endpoint para editar foto de perfil
+router.put('/imagen', (req, res) => {
+    fs.writeFile("./images/profile/" + req.body.username + ".jpg", req.body.image, { encoding: 'base64' }, function (error) {
+        if (error) {
+            console.log(error);
+            res.status(500).json({
+                mensaje: error.message
+            })
+        } else {
+            res.status(200).json({
+                mensaje: "Foto de perfil actualizada correctamente"
+            })
+        }
+    });
+
+})
+
 // EndPonit para editar el nombre, apellidos o status de una cuenta
 router.put('/', (req, res) => {
     UsuarioController.update(req.body, function (error, usuario) {
@@ -110,42 +128,15 @@ router.put('/', (req, res) => {
                 error
             })
         } else {
-            res.status(200).json({usuario});
-        }
-    })
-})
-
-// Endpoint para editar foto de perfil
-router.put('/imagen', (req, res) => {
-    if (!req.files.profilePic) {
-        res.status(400).json({
-            mensaje: "Falta imagen para guardar"
-        })
-    }
-
-    var data = {
-        imageName: req.body.username + "_" + req.files.profilePic.name,
-        username: req.body.username
-    }
-    req.files.profilePic.mv("./images/profile/" + data.imageName)
-
-    UsuarioController.updateProfPic(data, function (error) {
-        if (!error) {
-            res.status(500).json({
-                mensaje: "Error en el servidor",
-            })
-        } else {
-            res.json({
-                mensaje: "Foto actualizada"
-            })
+            res.status(200).json({ usuario });
         }
     })
 })
 
 // EndPonit para agregar amigo
 router.post('/agregaramigo', (req, res) => {
-    FriendshipsController.addFriend(req.body, function(error, response) {
-        if(!error) {
+    FriendshipsController.addFriend(req.body, function (error, response) {
+        if (!error) {
             res.send(response);
         } else {
             res.send(error);

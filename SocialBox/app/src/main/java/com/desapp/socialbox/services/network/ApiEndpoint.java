@@ -10,4 +10,5 @@ public abstract class ApiEndpoint {
     public  static  String findAccount = baseUrl + "users/nombre";
     public  static  String findAccountByUsername = baseUrl + "users/username";
     public static String editProfile = baseUrl + "users/";
+    public  static  String modifyProfilePic = baseUrl + "users/imagen";
 }

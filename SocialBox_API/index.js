@@ -6,8 +6,8 @@ const fileUpload = require('express-fileupload');
 var PORT = 8080;
 
 // Líneas usuadas para llenar el 'req.body'
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb', extended: true}));
 app.use(fileUpload({
     createParentPath: true
 }))
