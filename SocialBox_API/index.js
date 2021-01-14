@@ -15,7 +15,7 @@ app.use(fileUpload({
 app.use('/api/users', require('./routes/usuarios'));
 
 app.listen(PORT, () => {
-    sequelize.sync({force: false})
+    sequelize.sync({force: true})
         .then(() => {
             console.log("Base de datos autenticada y conectada");
             console.log(`Servidor iniciado en el puerto ${PORT}`);

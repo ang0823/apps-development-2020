@@ -39,15 +39,11 @@ module.exports = {
             apellidos: user.apellidos,
             username: user.username,
             contrasena: user.contrasena,
-            profilePic: defaultProfilePic,
-            status: {
-                type: DataTypes.STRING,
-                defaultValue: 'Hola, estoy usando SocialBox'
-            }
+            profilePic: defaultProfilePic
         }).then(user => {
             callback(null, user)
         }).catch(error => {
-            callback(error)
+            callback("Nombre de usuario en uso")
         });
     },
 

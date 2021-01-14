@@ -97,7 +97,7 @@ router.post('/', (req, res) => {
                 mensaje: "Ocurrió un error al guardar la cuenta."
             })
         } else {
-            res.json(usuario)
+            res.status(200).json(usuario);
         }
     })
 })

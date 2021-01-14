@@ -18,7 +18,10 @@ Usuario.init({
     },
     contrasena: DataTypes.STRING(50),
     profilePic: DataTypes.STRING,
-    status: DataTypes.STRING
+    status: {
+        type: DataTypes.STRING,
+        defaultValue: 'Hola, estoy usando SocialBox!'
+    }
 }, {
     sequelize,
     modelName: "usuario"

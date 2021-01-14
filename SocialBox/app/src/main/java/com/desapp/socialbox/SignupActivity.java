@@ -58,14 +58,13 @@ public class SignupActivity extends AppCompatActivity {
         params.put("contrasena", contrasena.getText().toString());
 
         JSONObject jsonData = new JSONObject(params);
-
         JsonObjectRequest signUpRequest = new JsonObjectRequest(Request.Method.POST, ApiEndpoint.signUp,
                 jsonData, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     Usuario usuario = JsonAdapter.signUpAdapter(response);
-                    mostrarSesion();
+                    mostrarInicioSesion();
                 } catch (JSONException e) {
                     Toast.makeText(SignupActivity.this, "Respuesta inesperada del servidor.",
                             Toast.LENGTH_LONG).show();
@@ -74,14 +73,14 @@ public class SignupActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(SignupActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(SignupActivity.this, "Nombre de usuario en uso", Toast.LENGTH_LONG).show();
             }
         });
         volley.agregarACola(signUpRequest);
     }
 
-    private void mostrarSesion() {
-        Intent intent = new Intent(this, NavigationActivity.class);
+    private void mostrarInicioSesion() {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         this.finish();
     }
