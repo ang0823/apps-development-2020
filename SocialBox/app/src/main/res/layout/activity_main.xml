@@ -44,18 +44,17 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/inputHeight"
             android:layout_marginVertical="5dp"
-            android:background="@color/app_light_blue"
-            android:radius="50dp"
+            android:background="@drawable/blue_round_corner"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
-            android:padding="10dp" />
+            android:paddingHorizontal="15dp" />
 
         <EditText
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="@dimen/inputHeight"
-            android:background="@color/app_light_blue"
-            android:padding="10dp"
+            android:background="@drawable/blue_round_corner"
+            android:paddingHorizontal="15dp"
             android:layout_marginVertical="5dp"
             android:inputType="textPassword"
             android:hint="@string/password"/>
@@ -68,7 +67,6 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/filled_button"
             android:onClick="activarDesactivarBotonLogin"
-            android:radius="50dp"
             android:text="@string/login"
             android:textAllCaps="false"
             android:textColor="@color/colorWhite" />
@@ -80,7 +78,6 @@
             android:layout_marginVertical="5dp"
             android:background="@drawable/transparent_button"
             android:onClick="crearCuenta"
-            android:radius="50dp"
             android:text="@string/signup"
             android:textAllCaps="false"
             android:textColor="@color/secondary_color" />
