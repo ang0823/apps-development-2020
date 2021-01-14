@@ -12,9 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".OtherUserProfileActivity"
-            android:parentActivityName=".AddFriendActivity"
-            android:label="Perfil de usuario"/>
+        <activity android:name=".EditInfoActivity"></activity>
+        <activity
+            android:name=".OtherUserProfileActivity"
+            android:label="Perfil de usuario"
+            android:parentActivityName=".AddFriendActivity" />
         <activity android:name=".AddFriendActivity" />
         <activity android:name=".NavigationActivity" />
         <activity
