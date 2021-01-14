@@ -1,5 +1,6 @@
 package com.desapp.socialbox.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,6 +21,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.desapp.socialbox.EditInfoActivity;
 import com.desapp.socialbox.MainActivity;
 import com.desapp.socialbox.NavigationActivity;
 import com.desapp.socialbox.R;
@@ -124,7 +126,7 @@ public class ProfileFragment extends Fragment implements PopupMenu.OnMenuItemCli
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.photo:
-                Toast.makeText(getActivity(), "Presionaste editar foto", Toast.LENGTH_SHORT).show();
+                modifyProfileData();
                 return true;
             case R.id.info:
                 Toast.makeText(getActivity(), "Presionnaste editar información", Toast.LENGTH_SHORT).show();
@@ -132,5 +134,14 @@ public class ProfileFragment extends Fragment implements PopupMenu.OnMenuItemCli
             default:
                 return false;
         }
+    }
+
+    private void modifyProfileData() {
+        Intent intent = new Intent(getContext(), EditInfoActivity.class);
+        intent.putExtra("usuario", usuario.getUsername());
+        intent.putExtra("nombre", usuario.getNombre());
+        intent.putExtra("apellidos", usuario.getApellidos());
+        intent.putExtra("estado", usuario.getStatus());
+        getActivity().startActivity(intent);
     }
 }

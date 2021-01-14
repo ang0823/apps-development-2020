@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EditInfoActivity"></activity>
+        <activity
+            android:name=".EditInfoActivity"
+            android:label="Modificar datos"
+            android:parentActivityName=".NavigationActivity"/>
         <activity
             android:name=".OtherUserProfileActivity"
             android:label="Perfil de usuario"
