@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/photo"
+        android:title="Modificar información de perfil"/>
+    <item
+        android:id="@+id/info"
+        android:title="Modificar foto de perfil"/>
+</menu>
