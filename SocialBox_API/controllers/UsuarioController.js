@@ -1,5 +1,6 @@
 const Usuario = require('../database/models/Usuario')
 const { Op, where, DataTypes } = require('sequelize')
+const Picture = require('../database/models/Picture')
 
 
 
@@ -24,7 +25,8 @@ module.exports = {
             attributes: ['id', 'nombre', 'apellidos', 'username', 'profilePic', 'status'],
             where: {
                 username: nombre_usuario
-            }
+            },
+            include: {model: Picture}
         }).then(user => {
             callback(null, user)
         }).catch(error => {

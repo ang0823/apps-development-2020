@@ -6,7 +6,7 @@ const { Op } = require('sequelize')
 const UsuarioController = require('../controllers/UsuarioController');
 const FriendshipsController = require("../controllers/FriendshipsController");
 const ImageController = require("../controllers/ImageController");
-var imgCount = 1;
+var imgCount = 1000;
 
 // EndPonit para inciar sesión
 router.post('/login', (req, res) => {
@@ -71,6 +71,15 @@ router.get("/image/:name", (req, res) => {
     res.sendFile(imagePath);
 })
 
+router.get("/uploads/:name", (req, res) => {
+    let image = req.params.name;
+    let currentDir = __dirname.split("\\");
+    currentDir.pop();
+    currentDir = currentDir.join("/")
+    let imagePath = currentDir + "/images/uploads/" + image;
+    res.sendFile(imagePath);
+})
+
 // EndPonit para obtener una cuenta por nombre de usuario
 router.post('/username', (req, res) => {
     UsuarioController.findByUsername(req.body.username, function (error, usuario) {
@@ -79,14 +88,17 @@ router.post('/username', (req, res) => {
                 mensaje: "Error en el servidor"
             })
         } else {
+            
             let user = {
                 id: usuario.id,
                 nombre: usuario.nombre,
                 apellidos: usuario.apellidos,
                 username: usuario.username,
                 profilePic: usuario.profilePic.replace("./images/profile/", "http://192.168.1.70:8080/api/users/image/"),
-                status: usuario.status
+                status: usuario.status,
+                pictures: usuario.pictures
             }
+            
             res.json(user)
         }
     });
@@ -180,7 +192,7 @@ router.post('/newpost', (req, res) => {
                         imagen: null
                     })
                 } else {
-                    imgCount = imgCount + 1;
+                    imgCount = imgCount - 1;
                     res.status(200).json({
                         imagen
                     })

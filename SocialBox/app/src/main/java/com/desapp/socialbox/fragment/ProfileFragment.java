@@ -76,9 +76,6 @@ public class ProfileFragment extends Fragment implements PopupMenu.OnMenuItemCli
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         initializeCoponents(view);
         getAndSetProfileData();
-        //ProfileUploadsAdapter adapter = new ProfileUploadsAdapter(getContext(), usuario.getImagenes());
-        //photoAlbum.setAdapter(adapter);
-        //photoAlbum.setLayoutManager(new LinearLayoutManager(getContext()));
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,6 +137,9 @@ public class ProfileFragment extends Fragment implements PopupMenu.OnMenuItemCli
         Picasso.get().load(usuario.getProfilePic()).into(fotoPerfil);
         nombre.setText(usuario.getNombre() + " " + usuario.getApellidos());
         status.setText(usuario.getStatus());
+        ProfileUploadsAdapter adapter = new ProfileUploadsAdapter(getContext(), usuario.getImagenes());
+        photoAlbum.setAdapter(adapter);
+        photoAlbum.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     private  void showPopupMenu(View view) {

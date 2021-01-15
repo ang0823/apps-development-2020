@@ -3,6 +3,7 @@ package com.desapp.socialbox.services.network;
 import android.util.Log;
 
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.desapp.socialbox.models.pojos.Imagen;
 import com.desapp.socialbox.models.pojos.Usuario;
 
 import org.json.JSONArray;
@@ -48,6 +49,8 @@ public class JsonAdapter {
 
     public static Usuario UserAdapter(JSONObject jsonObject) throws JSONException {
         Usuario usuario = new Usuario();
+        JSONArray userImages = jsonObject.getJSONArray("pictures");
+        ArrayList<Imagen> images = getImages(userImages);
 
         usuario.setId(jsonObject.getInt("id"));
         usuario.setNombre(jsonObject.getString("nombre"));
@@ -55,7 +58,24 @@ public class JsonAdapter {
         usuario.setUsername(jsonObject.getString("username"));
         usuario.setStatus(jsonObject.getString("status"));
         usuario.setProfilePic(jsonObject.getString("profilePic"));
+        usuario.setImagenes(images);
 
         return usuario;
+    }
+
+    private static ArrayList<Imagen> getImages(JSONArray imagesData) throws JSONException {
+        ArrayList<Imagen> imagenes = new ArrayList<>();
+        String replaceSrc;
+
+        for (int i = 0; i < imagesData.length(); i++) {
+            Imagen imagen = new Imagen();
+            JSONObject object = imagesData.getJSONObject(i);
+            replaceSrc = object.getString("src").replace("./images/uploads/", "http://192.168.1.70:8080/api/users/uploads/");
+            imagen.setUri(replaceSrc);
+            imagen.setDescripcion(object.getString("descripcion"));
+            imagenes.add(imagen);
+        }
+
+        return imagenes;
     }
 }

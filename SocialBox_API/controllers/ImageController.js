@@ -7,7 +7,7 @@ module.exports = {
         UsuarioController.findByUsername(image.sender, function (error, user) {
             if(!error){
                 Picture.create({
-                    src: "./images/uploads/" + image.name + ".jpg",
+                    src: "./images/uploads/" + image.name,
                     descripcion: image.description,
                     usuarioId: user.id
                 }).then(image => {
