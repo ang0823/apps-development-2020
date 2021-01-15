@@ -5,6 +5,8 @@ const Usuario = require("../database/models/Usuario")
 const { Op } = require('sequelize')
 const UsuarioController = require('../controllers/UsuarioController');
 const FriendshipsController = require("../controllers/FriendshipsController");
+const ImageController = require("../controllers/ImageController");
+var imgCount = 1;
 
 // EndPonit para inciar sesión
 router.post('/login', (req, res) => {
@@ -107,7 +109,6 @@ router.post('/', (req, res) => {
 router.put('/imagen', (req, res) => {
     fs.writeFile("./images/profile/" + req.body.username + ".jpg", req.body.image, { encoding: 'base64' }, function (error) {
         if (error) {
-            console.log(error);
             res.status(500).json({
                 mensaje: error.message
             })
@@ -146,13 +147,45 @@ router.put('/', (req, res) => {
     })
 })
 
-// EndPonit para agregar amigo
+// EndPoint para agregar amigo
 router.post('/agregaramigo', (req, res) => {
     FriendshipsController.addFriend(req.body, function (error, response) {
         if (!error) {
             res.send(response);
         } else {
             res.send(error);
+        }
+    })
+})
+
+// Endpoint para agregar una imagen
+router.post('/newpost', (req, res) => {
+    var imageName = req.body.username + "-" + imgCount + ".jpg";
+    fs.writeFile("./images/uploads/" + imageName, req.body.image, 
+    {encoding: "base64"}, function(error) {
+        if(error) {
+            res.status(500).json({
+                imagen: null
+            })
+        } else {
+            var imagen = {
+                sender: req.body.username,
+                name: imageName,
+                description: req.body.description
+            }
+
+            ImageController.StoreNewPicture(imagen, function (error, imagen) {
+                if(error) {
+                    res.status(500).json({
+                        imagen: null
+                    })
+                } else {
+                    imgCount = imgCount + 1;
+                    res.status(200).json({
+                        imagen
+                    })
+                }
+            })
         }
     })
 })

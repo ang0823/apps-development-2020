@@ -3,12 +3,11 @@ const sequelize = require("../dbConnection.js");
 
 class Picture extends Model{}
 Picture.init({
-    src : DataTypes.STRING,
-    descripcion: DataTypes.TEXT,
-    fechaSubida: {
-        type: DataTypes.DATE,
-        defaultValue: Date.now
-    }
+    src : {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    descripcion: DataTypes.TEXT
 }, {
     sequelize,
     modelName: "picture"
