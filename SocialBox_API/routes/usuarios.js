@@ -78,6 +78,7 @@ router.post('/username', (req, res) => {
             })
         } else {
             let user = {
+                id: usuario.id,
                 nombre: usuario.nombre,
                 apellidos: usuario.apellidos,
                 username: usuario.username,

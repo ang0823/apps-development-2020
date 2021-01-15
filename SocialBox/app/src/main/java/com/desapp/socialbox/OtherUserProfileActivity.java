@@ -2,7 +2,9 @@ package com.desapp.socialbox;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,6 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OtherUserProfileActivity extends AppCompatActivity {
+    String sender;
     private ImageView friendPicture;
     private TextView friedName;
     private TextView friendStatus;
@@ -45,8 +48,38 @@ public class OtherUserProfileActivity extends AppCompatActivity {
         addFriendBtn = findViewById(R.id.addFriendAction);
         volley = VolleyRequest.getInstance(OtherUserProfileActivity.this);
         colaPeticiones = volley.getColaPeticiones();
-
+        Intent intent = getIntent();
+        sender = intent.getStringExtra("sender");
         getAndSetData();
+        addFriendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendFriendRequest(v);
+            }
+        });
+    }
+
+    private void sendFriendRequest(final View view) {
+        Map<String, String> params = new HashMap<>();
+        params.put("sender", sender);
+        params.put("receptorId", Integer.toString(usuario.getId()));
+
+        JSONObject bodyRequest = new JSONObject(params);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, ApiEndpoint.addFriend,
+                bodyRequest, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                addFriendBtn.setVisibility(View.GONE);
+                Toast.makeText(OtherUserProfileActivity.this, "Solicitud enviada", Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(OtherUserProfileActivity.this, error.getClass().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        volley.agregarACola(request);
     }
 
     private void getAndSetData() {
@@ -69,7 +102,7 @@ public class OtherUserProfileActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast.makeText(OtherUserProfileActivity.this, error.toString(), Toast.LENGTH_LONG).show();
             }
         });
 

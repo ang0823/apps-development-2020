@@ -86,7 +86,7 @@ public class AddFriendActivity extends Activity {
             public void onResponse(JSONObject response) {
                 try{
                     usuarios = JsonAdapter.SearchAdapter(response);
-                    MyRvAdapter adapter = new MyRvAdapter(AddFriendActivity.this, (ArrayList<Usuario>)usuarios);
+                    MyRvAdapter adapter = new MyRvAdapter(AddFriendActivity.this, (ArrayList<Usuario>)usuarios, passedUsername);
                     recyclerView.setAdapter(adapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(AddFriendActivity.this));
                 }catch (JSONException e) {

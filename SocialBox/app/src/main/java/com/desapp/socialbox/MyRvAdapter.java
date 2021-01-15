@@ -19,12 +19,14 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class MyRvAdapter extends RecyclerView.Adapter<MyRvAdapter.MyViewVolder> {
+    String senderUser;
     ArrayList<Usuario> usuarios;
     Context context;
 
-    public MyRvAdapter(Context context, ArrayList<Usuario> usuarios) {
+    public MyRvAdapter(Context context, ArrayList<Usuario> usuarios, String senderUser) {
         this.context = context;
         this.usuarios = usuarios;
+        this.senderUser = senderUser;
     }
 
     @NonNull
@@ -47,6 +49,7 @@ public class MyRvAdapter extends RecyclerView.Adapter<MyRvAdapter.MyViewVolder> 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, OtherUserProfileActivity.class);
+                intent.putExtra("sender", senderUser);
                 intent.putExtra("username", usuarios.get(position).getUsername());
                 context.startActivity(intent);
             }

@@ -49,6 +49,7 @@ public class JsonAdapter {
     public static Usuario UserAdapter(JSONObject jsonObject) throws JSONException {
         Usuario usuario = new Usuario();
 
+        usuario.setId(jsonObject.getInt("id"));
         usuario.setNombre(jsonObject.getString("nombre"));
         usuario.setApellidos(jsonObject.getString("apellidos"));
         usuario.setUsername(jsonObject.getString("username"));
