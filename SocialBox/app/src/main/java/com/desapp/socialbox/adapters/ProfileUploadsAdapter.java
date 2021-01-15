@@ -56,9 +56,6 @@ public class ProfileUploadsAdapter extends RecyclerView.Adapter<ProfileUploadsAd
             photoDescription = itemView.findViewById(R.id.photo_desc);
             image = itemView.findViewById(R.id.image);
             likesAmount = itemView.findViewById(R.id.likes_amount);
-            btnLike = itemView.findViewById(R.id.btn_like);
-            btnComment = itemView.findViewById(R.id.btn_comment);
-            btnFav = itemView.findViewById(R.id.btn_fav);
         }
     }
 }
