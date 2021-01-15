@@ -29,11 +29,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.desapp.socialbox.EditInfoActivity;
 import com.desapp.socialbox.R;
+import com.desapp.socialbox.UploadPicActivity;
 import com.desapp.socialbox.adapters.ProfileUploadsAdapter;
 import com.desapp.socialbox.models.pojos.Usuario;
 import com.desapp.socialbox.services.network.ApiEndpoint;
 import com.desapp.socialbox.services.network.JsonAdapter;
 import com.desapp.socialbox.services.network.VolleyRequest;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -52,6 +54,7 @@ public class ProfileFragment extends Fragment implements PopupMenu.OnMenuItemCli
     TextView nombre;
     TextView status;
     ImageButton editProfile;
+    FloatingActionButton btnAdd;
     VolleyRequest volley;
     RequestQueue colaPeticiones;
     Uri imageUri;
@@ -70,29 +73,39 @@ public class ProfileFragment extends Fragment implements PopupMenu.OnMenuItemCli
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        editProfile = view.findViewById(R.id.editProfile);
-        fotoPerfil = view.findViewById(R.id.profilePic);
-        nombre = view.findViewById(R.id.NameView);
-        status = view.findViewById(R.id.Status);
-        photoAlbum = view.findViewById(R.id.photoAlbum);
-        Bundle bundle = getArguments();
-        nombreUsuario = bundle.getString("user");
-        volley = VolleyRequest.getInstance(getActivity());
-        colaPeticiones = volley.getColaPeticiones();
+        initializeCoponents(view);
         getAndSetProfileData();
-        ProfileUploadsAdapter adapter = new ProfileUploadsAdapter(getContext(), usuario.getImagenes());
-        photoAlbum.setAdapter(adapter);
-        photoAlbum.setLayoutManager(new LinearLayoutManager(getContext()));
+        //ProfileUploadsAdapter adapter = new ProfileUploadsAdapter(getContext(), usuario.getImagenes());
+        //photoAlbum.setAdapter(adapter);
+        //photoAlbum.setLayoutManager(new LinearLayoutManager(getContext()));
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showPopupMenu(v);
             }
         });
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadImageFile(v);
+            }
+        });
 
         return view;
+    }
+
+    private void initializeCoponents(View view) {
+        Bundle bundle = getArguments();
+        nombreUsuario = bundle.getString("user");
+        editProfile = view.findViewById(R.id.editProfile);
+        btnAdd = view.findViewById(R.id.btn_add);
+        fotoPerfil = view.findViewById(R.id.profilePic);
+        nombre = view.findViewById(R.id.NameView);
+        status = view.findViewById(R.id.Status);
+        photoAlbum = view.findViewById(R.id.photoAlbum);
+        volley = VolleyRequest.getInstance(getActivity());
+        colaPeticiones = volley.getColaPeticiones();
     }
 
     private void getAndSetProfileData() {
@@ -215,5 +228,11 @@ public class ProfileFragment extends Fragment implements PopupMenu.OnMenuItemCli
         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArray);
         byte[] imgBytes = byteArray.toByteArray();
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
+    }
+
+
+    private void uploadImageFile(View v) {
+        Intent intent = new Intent(getContext(), UploadPicActivity.class);
+        getActivity().startActivity(intent);
     }
 }
