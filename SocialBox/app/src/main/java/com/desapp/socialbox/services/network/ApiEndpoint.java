@@ -12,4 +12,5 @@ public abstract class ApiEndpoint {
     public static String editProfile = baseUrl + "users/";
     public  static  String modifyProfilePic = baseUrl + "users/imagen";
     public static  String addFriend = baseUrl + "users/agregaramigo";
+    public static  String uploadPic = baseUrl + "users/newpost";
 }

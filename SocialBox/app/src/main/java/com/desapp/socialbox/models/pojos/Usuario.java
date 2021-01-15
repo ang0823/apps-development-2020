@@ -1,5 +1,7 @@
 package com.desapp.socialbox.models.pojos;
 
+import java.util.ArrayList;
+
 public class Usuario {
     int id;
     String nombre;
@@ -7,6 +9,7 @@ public class Usuario {
     String username;
     String profilePic;
     String status;
+    ArrayList<Imagen> imagenes;
 
     public int getId() { return id; }
 
@@ -43,4 +46,8 @@ public class Usuario {
     public String getStatus() { return status; }
 
     public void setStatus(String status) { this.status = status; }
+
+    public ArrayList<Imagen> getImagenes() { return imagenes; }
+
+    public void setImagenes(ArrayList<Imagen> imagenes) { this.imagenes = imagenes; }
 }

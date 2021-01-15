@@ -233,6 +233,7 @@ public class ProfileFragment extends Fragment implements PopupMenu.OnMenuItemCli
 
     private void uploadImageFile(View v) {
         Intent intent = new Intent(getContext(), UploadPicActivity.class);
+        intent.putExtra("sender", usuario.getUsername());
         getActivity().startActivity(intent);
     }
 }
