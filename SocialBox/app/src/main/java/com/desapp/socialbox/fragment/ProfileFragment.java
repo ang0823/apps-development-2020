@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -27,6 +29,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.desapp.socialbox.EditInfoActivity;
 import com.desapp.socialbox.R;
+import com.desapp.socialbox.adapters.ProfileUploadsAdapter;
 import com.desapp.socialbox.models.pojos.Usuario;
 import com.desapp.socialbox.services.network.ApiEndpoint;
 import com.desapp.socialbox.services.network.JsonAdapter;
@@ -53,6 +56,7 @@ public class ProfileFragment extends Fragment implements PopupMenu.OnMenuItemCli
     RequestQueue colaPeticiones;
     Uri imageUri;
     Bitmap bitmap;
+    RecyclerView photoAlbum;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -72,12 +76,15 @@ public class ProfileFragment extends Fragment implements PopupMenu.OnMenuItemCli
         fotoPerfil = view.findViewById(R.id.profilePic);
         nombre = view.findViewById(R.id.NameView);
         status = view.findViewById(R.id.Status);
+        photoAlbum = view.findViewById(R.id.photoAlbum);
         Bundle bundle = getArguments();
         nombreUsuario = bundle.getString("user");
         volley = VolleyRequest.getInstance(getActivity());
         colaPeticiones = volley.getColaPeticiones();
         getAndSetProfileData();
-
+        ProfileUploadsAdapter adapter = new ProfileUploadsAdapter(getContext(), usuario.getImagenes());
+        photoAlbum.setAdapter(adapter);
+        photoAlbum.setLayoutManager(new LinearLayoutManager(getContext()));
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

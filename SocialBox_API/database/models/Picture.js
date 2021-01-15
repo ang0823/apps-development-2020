@@ -7,7 +7,6 @@ Picture.init({
     descripcion: DataTypes.TEXT,
     fechaSubida: {
         type: DataTypes.DATE,
-        allowNull: false,
         defaultValue: Date.now
     }
 }, {
